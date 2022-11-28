@@ -22,10 +22,11 @@ object NoteService {
     private var noteIdCounter = 0
     private var notes: MutableList<Note> = emptyList<Note>().toMutableList()
 
-    fun add(note: Note) {
+    fun add(note: Note): Note {
         noteIdCounter += 1
         note.id = noteIdCounter
         notes.add(note)
+        return notes.last()
     }
 
     fun createComment(noteId: Int, comment: Comment): Boolean {
@@ -97,6 +98,11 @@ object NoteService {
             return true
         }
         return false
+    }
+
+    fun clear() {
+        notes = emptyList<Note>().toMutableList()
+        noteIdCounter = 0
     }
 
     fun printNotes() {
